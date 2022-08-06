@@ -1,0 +1,42 @@
+#!/bin/bash
+
+echo "Criando diretórios..."
+
+mkdir /publico 
+mkdir /adm
+mkdir /ven
+mkdir /sec
+
+echo "Criando grupos..."
+
+groupadd GRP_ADM 
+groupadd GRP_VEN
+groupadd GRP_SEC
+
+echo "Criando usuários e adicionando aos grupos..."
+
+useradd carlos -c "Carlos Silva" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -g GRP_ADM 
+useradd maria -c "Maria Souza" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -g GRP_ADM 
+useradd joao -c "Joao Santos" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -g GRP_ADM 
+
+useradd debora -c "Debora Oliveira" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -g GRP_VEN
+useradd sebastiana -c "Sebastiana Pereira" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -g GRP_VEN 
+useradd roberto -c "Roberto Batista" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -g GRP_VEN 
+
+useradd josefina -c "Josefina Cardoso" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -g GRP_SEC
+useradd amanda -c "Amanda Carvalho" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -g GRP_SEC 
+useradd rogerio -c "Rogerio Ferreira" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -g GRP_SEC
+
+echo "Definindo permissoes..." 
+
+chmod 777 /publico/
+chmod 770 /GRP_ADM
+chmod 770 /GRP_VEN
+chmod 770 /GRP_SEC
+
+chown root:GRP_ADM /adm
+chown root:GRP_VEN /ven
+chown root:GRP_SEC /sec   
+ 
+ 
+echo "Fim..."
